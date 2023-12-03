@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Mealstrom</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/software-download.css' rel='stylesheet'>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: blur(0.04px);
+            opacity: 0.8;
+        }
+
+        .header-overlay::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            filter: blur(20px);
+            z-index: 0;
+        }
+
+        .top-header {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            background-color: rgba(255, 68, 51, 0.2);
+            padding: 20px;
+            color: black;
+        }
+
+        .banner {
+            height: 100px; /* Adjust the height as needed */
+        }
+
+        .content {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+            max-width: 90%;
+            text-align: left;
+        }
+
+        .content img {
+            width: 30%; /* Make the image responsive */
+            max-width: 100%; /* Limit the maximum width */
+        }
+
+        .tag_line {
+            position: absolute;
+            top: 70%;
+            left: 1%;
+            z-index: 1;
+            text-align: left;
+            color: rgba(251, 168, 3, 255);
+            font-size: 0.6em;
+            margin-top: 10px;
+        }
+
+        .icons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .icons button {
+            font-size: 1.5em;
+            color: rgba(251, 168, 3, 255);
+            background-color: rgba(255, 68, 51, 0);
+            padding: 5px;
+            border: none;
+        }
+
+        .download-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            color: rgba(255, 255, 255, 1);
+            text-align: center;
+            background-color: rgba(255, 68, 51, 0.1);
+            font-size: 1.4em;
+            width: 90%; /* Adjust the width for smaller screens */
+            max-height: 50%;
+            overflow: auto;
+            resize: both;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid rgba(251, 168, 3, 255);
+        }
+
+        .download-text p {
+            margin: 0;
+        }
+
+        .download-btn {
+            position: absolute;
+            top: 65%; /* Adjust the position for smaller screens */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .btn {
+            background-color: Orange;
+            border: none;
+            color: white;
+            padding: 15px 20px; /* Adjust padding for smaller screens */
+            cursor: pointer;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            border-radius: 10px;
+        }
+
+        .btn:hover {
+            background-color: DarkOrange;
+        }
+
+        .btn i {
+            margin-right: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 8%;
+            right: 5%;
+            font-size: 1.5em;
+            color: Orange;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .close-btn i {
+            margin-right: 15px;
+        }
+
+        .close-btn:hover {
+            color: DarkOrange;
+        }
+
+        #contact-popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 1);
+            color: rgba(251, 168, 3, 255);
+            font-size: 1 em;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        @media screen and (max-width: 768px) {
+            .top-header {
+                padding: 10px;
+            }
+
+            .banner {
+                height: 80px;
+            }
+
+            .icons button {
+                font-size: 1em;
+            }
+
+            .download-text {
+                width: 90%;
+            }
+
+            .btn {
+                padding: 10px 15px;
+                font-size: 1em;
+            }
+
+            .tag_line {
+                top: 80%; /* Adjust the position from the top for smaller screens */
+            }
+
+            .tag_line h1 {
+                font-size: 0.9em; /* Adjust the font size for smaller screens */
+            }
+
+            .download-text {
+                font-size: 1.2em;
+                width: 70%; /* Adjust the width for smaller screens */
+            }
+
+            .download-btn {
+            top: 85%; /* Adjust the position for smaller screens */
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-header">
+        <div class="banner"></div>
+        <div class="icons">
+            <button onclick="contactPopup()">
+                <i class="fas fa-envelope"></i> Contact/Help
+            </button>
+        </div>
+    </div>
+
+    <video class="video-background" autoplay muted loop>
+        <source src="background_video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="header-overlay"></div>
+
+    <div class="content">
+        <img src="logo_mealstrom.png" alt="Logo">
+        <div class="tag_line">
+            <h1>Cooking Chaos with a Side of Strategy!</h1>
+        </div>
+    </div>
+
+    <div class="download-text">
+        <p>Introducing Mealstrom - a captivating puzzle/roguelike game where culinary chaos meets strategic fun! Join the adventure of a food truck owner, toss food into diverse crowds, and unlock unique power-ups for endless replayability. Our game is designed for everyone, offering a tutorial, intuitive controls, and a dynamic gaming experience. Stay tuned for a culinary journey like no other!</p>
+    </div>
+
+    <div class="download-btn">
+        <button class="btn" onclick="downloadFile()">
+            <i class="gg-software-download"></i> Download
+        </button>
+    </div>
+
+    <div id="contact-popup">
+        <span class="close-btn" onclick="closePopup()">
+            <i class="fas fa-times"></i> Close
+        </span>
+        <p>For help, please contact Group 1</p>
+    </div>
+
+    <script>
+        function downloadFile() {
+            var downloadLink = document.createElement("a");
+            downloadLink.href = "mealstrom_package.zip";
+            downloadLink.download = "mealstrom_package.zip";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
+
+        function contactPopup() {
+            var popup = document.getElementById('contact-popup');
+            if (popup.style.display === 'none' || popup.style.display === '') {
+                popup.style.display = 'block';
+            } else {
+                popup.style.display = 'none';
+            }
+        }
+
+        function closePopup() {
+            document.getElementById('contact-popup').style.display = 'none';
+        }
+    </script>
+
+</body>
+
+</html>
