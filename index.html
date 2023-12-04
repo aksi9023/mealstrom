@@ -267,12 +267,12 @@
     <script>
         function downloadFile() {
             var downloadLink = document.createElement("a");
-            downloadLink.href = "mealstrom_package.zip";
-            downloadLink.download = "mealstrom_package.zip";
-            document.body.appendChild(downloadLink);
+            downloadLink.href = "https://mcmasteru365-my.sharepoint.com/:u:/g/personal/akashdea_mcmaster_ca/EcmOXBZtYuRFuo281wGhKmYBpX9-VZy9BDLA-Kys95ZHYQ?e=ei7gBO";
+            downloadLink.target = "_blank"; // Open link in a new tab
+            downloadLink.rel = "noopener noreferrer"; // Security best practices
             downloadLink.click();
-            document.body.removeChild(downloadLink);
         }
+
 
         function contactPopup() {
             var popup = document.getElementById('contact-popup');
